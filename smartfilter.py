@@ -46,31 +46,27 @@ class SmartFilter:
       raise NetworkException()
     return {}
 
-  # Endpoint: /xss/detect
-  def detect(self, input, whitelist):
+  # Endpoint: /rule/verify
+  def verify_rule(self, rule_key):
     try:
-      options = {'api_key':self.key, 'input':input, 'whitelist_id':whitelist}
-      response = requests.post(self.base + '/xss/detect', params=options)
+      options = {'api_key':self.key, 'rule_key':rule_key}
+      response = requests.get(self.base + '/rule/verify', params=options)
       if response.status_code == 200: 
-        return response.json()
+        return True
       elif response.status_code == 400: 
         raise BadInputParameter()
       elif response.status_code == 403:
         raise BadAPIKey()
-      elif response.status_code == 413:
-        raise RequestTooLarge()
       elif response.status_code == 500:
         raise InternalError()
-      elif response.status_code == 507:
-        raise AccountQuotaExceeded()
     except requests.exceptions.RequestException:
       raise NetworkException()
-    return {}
+    return False
 
   # Endpoint: /xss/filter
-  def filter(self, input, whitelist):
+  def filter(self, input, rule_key):
     try:
-      options = {'api_key':self.key, 'input':input, 'whitelist_id':whitelist}
+      options = {'api_key':self.key, 'input':input, 'rule_key':rule_key}
       response = requests.post(self.base + '/xss/filter', params=options)
       if response.status_code == 200: 
         return response.json()

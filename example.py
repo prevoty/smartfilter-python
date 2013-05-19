@@ -3,21 +3,21 @@ from smartfilter import NetworkException
 from smartfilter import BadInputParameter, BadAPIKey, RequestTooLarge
 from smartfilter import InternalError, AccountQuotaExceeded
 
-key = 'key goes here'
-whitelist = 'whitelist goes here'
-input = 'the <script>alert("quick brown fox");</script> jumps over the lazy dog'
+api_key = 'api key goes here'
+rule_key = 'rule key goes here'
+input = 'the <script>alert("quick brown fox");</script> jumps over the lazy dog & mouse'
 
-smartfilter = SmartFilter(key)
+smartfilter = SmartFilter(api_key)
 
 try:
   # Verify (returns a boolean)
   print smartfilter.verify()
   # Info (returns a dict with the goodies)
   print smartfilter.info()
-  # Detect (returns a dict with the goodies)
-  print smartfilter.detect(input, whitelist)
+  # VerifyRule (returns a boolean)
+  print smartfilter.verify_rule(rule_key)
   # Filter (returns a dict with the goodies)
-  print smartfilter.filter(input, whitelist)
+  print smartfilter.filter(input, rule_key)
 except NetworkException:
   print 'Network connectivity issue'
 except BadInputParameter:

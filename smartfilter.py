@@ -10,7 +10,7 @@ class AccountQuotaExceeded(Exception): pass
 class SmartFilter:
   def __init__(self, key):
     self.key = key
-    self.base = 'http://api.prevoty.com/1'
+    self.base = 'https://api.prevoty.com/1'
 
   # Endpoint: /key/verify
   def verify(self):

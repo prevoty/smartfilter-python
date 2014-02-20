@@ -18,7 +18,7 @@ To get started:
 
 3) Edit `example.py` - you will want to put in your API key and rule key
 
-4) Run `php example.py`
+4) Run `python example.py`
 
 ## Issues
 
